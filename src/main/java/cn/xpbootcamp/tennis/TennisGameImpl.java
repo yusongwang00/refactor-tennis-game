@@ -1,7 +1,5 @@
 package cn.xpbootcamp.tennis;
 
-import cn.xpbootcamp.tennis.TennisGame;
-
 public class TennisGameImpl implements TennisGame {
     public int P1point = 0;
     public int P2point = 0;
@@ -33,48 +31,78 @@ public class TennisGameImpl implements TennisGame {
     }
 
     private String getCommon(String score) {
-        if (P1point < 4 && P2point < 4 && P1point != P2point) {
+        if (isCommonCase()) {
             score = getPointName(P1point) + "-" + getPointName(P2point);
         }
         return score;
     }
 
+    private boolean isCommonCase() {
+        return P1point < 4 && P2point < 4 && P1point != P2point;
+    }
+
     private String getDeuce(String score) {
-        if (P1point == P2point && P1point >= 3)
+        if (isDeuce())
             score = "Deuce";
         return score;
     }
 
+    private boolean isDeuce() {
+        return P1point == P2point && P1point >= 3;
+    }
+
     private String getAll(String score) {
-        if (P1point == P2point && P1point < 4) {
+        if (isAll()) {
             score = getPointName(P1point);
             score += "-All";
         }
         return score;
     }
 
+    private boolean isAll() {
+        return P1point == P2point && P1point < 4;
+    }
+
     private String getAdvantage(String score) {
-        if (P1point > P2point && P2point >= 3) {
+        if (p1Advantage()) {
             score = "Advantage player1";
         }
 
-        if (P2point > P1point && P1point >= 3) {
+        if (p2Advantage()) {
             score = "Advantage player2";
         }
         return score;
     }
 
+
     private String getWinner(String score) {
-        if (P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2) {
+        if (p1Win()) {
             score = "Win for player1";
         }
-        if (P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2) {
+        if (p2Win()) {
             score = "Win for player2";
         }
         return score;
     }
 
-    private String  getPointName(int point) {
+    private boolean p2Win() {
+        return P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2;
+    }
+
+    private boolean p1Win() {
+        return P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2;
+    }
+
+    private boolean p2Advantage() {
+        return P2point > P1point && P1point >= 3;
+    }
+
+    private boolean p1Advantage() {
+        return P1point > P2point && P2point >= 3;
+    }
+
+
+    private String getPointName(int point) {
         switch (point) {
             case 0:
                 return "Love";
