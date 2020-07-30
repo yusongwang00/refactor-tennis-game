@@ -19,32 +19,21 @@ public class TennisGameImpl implements TennisGame {
     public String getScore() {
         String score = "";
         score = getAll(score);
-        if (P1point == P2point && P1point >= 3)
-            score = "Deuce";
 
-        if (P1point > 0 && P2point == 0) {
-            if (P1point == 1)
-                P1res = "Fifteen";
-            if (P1point == 2)
-                P1res = "Thirty";
-            if (P1point == 3)
-                P1res = "Forty";
+        score = getDeuce(score);
 
-            P2res = "Love";
-            score = P1res + "-" + P2res;
-        }
-        if (P2point > 0 && P1point == 0) {
-            if (P2point == 1)
-                P2res = "Fifteen";
-            if (P2point == 2)
-                P2res = "Thirty";
-            if (P2point == 3)
-                P2res = "Forty";
+        score = getLove(score);
 
-            P1res = "Love";
-            score = P1res + "-" + P2res;
-        }
+        score = getCommon(score);
 
+        score = getAdvantage(score);
+
+        score = getWinner(score);
+
+        return score;
+    }
+
+    private String getCommon(String score) {
         if (P1point > P2point && P1point < 4) {
             if (P1point == 2)
                 P1res = "Thirty";
@@ -67,10 +56,38 @@ public class TennisGameImpl implements TennisGame {
                 P1res = "Thirty";
             score = P1res + "-" + P2res;
         }
+        return score;
+    }
 
-        score = getAdvantage(score);
+    private String getLove(String score) {
+        if (P1point > 0 && P2point == 0) {
+            if (P1point == 1)
+                P1res = "Fifteen";
+            if (P1point == 2)
+                P1res = "Thirty";
+            if (P1point == 3)
+                P1res = "Forty";
 
-        score = getWinner(score);
+            P2res = "Love";
+            score = P1res + "-" + P2res;
+        }
+        if (P2point > 0 && P1point == 0) {
+            if (P2point == 1)
+                P2res = "Fifteen";
+            if (P2point == 2)
+                P2res = "Thirty";
+            if (P2point == 3)
+                P2res = "Forty";
+
+            P1res = "Love";
+            score = P1res + "-" + P2res;
+        }
+        return score;
+    }
+
+    private String getDeuce(String score) {
+        if (P1point == P2point && P1point >= 3)
+            score = "Deuce";
         return score;
     }
 
