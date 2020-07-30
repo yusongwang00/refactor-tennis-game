@@ -23,8 +23,6 @@ public class TennisGameImpl implements TennisGame {
 
         score = getDeuce(score);
 
-        score = getLove(score);
-
         score = getCommon(score);
 
         score = getAdvantage(score);
@@ -37,20 +35,6 @@ public class TennisGameImpl implements TennisGame {
     private String getCommon(String score) {
         if (P1point < 4 && P2point < 4 && P1point != P2point) {
             score = getPointName(P1point) + "-" + getPointName(P2point);
-        }
-        return score;
-    }
-
-    private String getLove(String score) {
-        if (P1point > 0 && P2point == 0) {
-            P1res = getPointName(P1point);
-            P2res = "Love";
-            score = P1res + "-" + P2res;
-        }
-        if (P2point > 0 && P1point == 0) {
-           P2res = getPointName(P2point);
-            P1res = "Love";
-            score = P1res + "-" + P2res;
         }
         return score;
     }
