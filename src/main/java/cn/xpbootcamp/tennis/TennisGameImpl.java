@@ -17,11 +17,14 @@ public class TennisGameImpl implements TennisGame {
     public String getScore() {
         String score = "";
 
-        score = getAll(score);
+        if (isAll())
+            return getAll();
 
-        score = getDeuce(score);
+        if (isDeuce())
+            return getDeuce();
 
-        score = getCommon(score);
+        if (isCommonCase())
+            return getCommon();
 
         score = getAdvantage(score);
 
@@ -30,37 +33,28 @@ public class TennisGameImpl implements TennisGame {
         return score;
     }
 
-    private String getCommon(String score) {
-        if (isCommonCase()) {
-            score = getPointName(P1point) + "-" + getPointName(P2point);
-        }
-        return score;
+    private String getCommon() {
+        return getPointName(P1point) + "-" + getPointName(P2point);
     }
 
     private boolean isCommonCase() {
         return P1point < 4 && P2point < 4 && P1point != P2point;
     }
 
-    private String getDeuce(String score) {
-        if (isDeuce())
-            score = "Deuce";
-        return score;
+    private String getDeuce() {
+        return "Deuce";
     }
 
     private boolean isDeuce() {
         return P1point == P2point && P1point >= 3;
     }
 
-    private String getAll(String score) {
-        if (isAll()) {
-            score = getPointName(P1point);
-            score += "-All";
-        }
-        return score;
+    private String getAll() {
+        return getPointName(P1point) + "-All";
     }
 
     private boolean isAll() {
-        return P1point == P2point && P1point < 4;
+        return P1point == P2point && P1point < 3;
     }
 
     private String getAdvantage(String score) {
