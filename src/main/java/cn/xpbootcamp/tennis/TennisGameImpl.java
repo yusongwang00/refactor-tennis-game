@@ -61,24 +61,12 @@ public class TennisGameImpl implements TennisGame {
 
     private String getLove(String score) {
         if (P1point > 0 && P2point == 0) {
-            if (P1point == 1)
-                P1res = "Fifteen";
-            if (P1point == 2)
-                P1res = "Thirty";
-            if (P1point == 3)
-                P1res = "Forty";
-
+            P1res = getPointName(P1point);
             P2res = "Love";
             score = P1res + "-" + P2res;
         }
         if (P2point > 0 && P1point == 0) {
-            if (P2point == 1)
-                P2res = "Fifteen";
-            if (P2point == 2)
-                P2res = "Thirty";
-            if (P2point == 3)
-                P2res = "Forty";
-
+           P2res = getPointName(P2point);
             P1res = "Love";
             score = P1res + "-" + P2res;
         }
@@ -104,6 +92,21 @@ public class TennisGameImpl implements TennisGame {
         return score;
     }
 
+    private String  getPointName(int point) {
+        switch (point) {
+            case 0:
+                return "Love";
+            case 1:
+                return "Fifteen";
+            case 2:
+                return "Thirty";
+            case 3:
+                return "Forty";
+            default:
+                return "";
+        }
+
+    }
     private String getAdvantage(String score) {
         if (P1point > P2point && P2point >= 3) {
             score = "Advantage player1";
