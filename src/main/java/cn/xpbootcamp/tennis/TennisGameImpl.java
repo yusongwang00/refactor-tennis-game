@@ -32,7 +32,7 @@ public class TennisGameImpl implements TennisGame {
     }
 
     private String getCommon() {
-        return getPointName(P1point) + "-" + getPointName(P2point);
+        return TennisGameRule.getPointName(P1point) + "-" + TennisGameRule.getPointName(P2point);
     }
 
     private boolean isCommonCase() {
@@ -48,7 +48,7 @@ public class TennisGameImpl implements TennisGame {
     }
 
     private String getAll() {
-        return getPointName(P1point) + "-All";
+        return TennisGameRule.getPointName(P1point) + "-All";
     }
 
     private boolean isAll() {
@@ -87,22 +87,6 @@ public class TennisGameImpl implements TennisGame {
         return P1point > P2point && P2point >= 3;
     }
 
-
-    private String getPointName(int point) {
-        switch (point) {
-            case 0:
-                return "Love";
-            case 1:
-                return "Fifteen";
-            case 2:
-                return "Thirty";
-            case 3:
-                return "Forty";
-            default:
-                return "";
-        }
-
-    }
 
     public void wonPoint(String player) {
         if (player == "player1")
