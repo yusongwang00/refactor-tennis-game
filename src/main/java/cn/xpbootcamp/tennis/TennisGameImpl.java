@@ -93,34 +93,10 @@ public class TennisGameImpl implements TennisGame {
         return score;
     }
 
-    public void SetP1Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P1Score();
-        }
-
-    }
-
-    public void SetP2Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P2Score();
-        }
-
-    }
-
-    public void P1Score() {
-        P1point++;
-    }
-
-    public void P2Score() {
-        P2point++;
-    }
-
     public void wonPoint(String player) {
         if (player == "player1")
-            P1Score();
+            P1point++;
         else
-            P2Score();
+            P2point++;;
     }
 }
